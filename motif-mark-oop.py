@@ -13,8 +13,8 @@ degenerate_bases: dict = {'A': 'A', 'T': 'TU', 'G': 'G', 'C': 'C', 'U': 'TU',
                           'K': 'GT', 'M': 'AC', 'B': 'CGT', 'D': 'AGT',
                           'H': 'ACT', 'V': 'ACG', 'N': 'ACGT'}
 
-color_codes: list = [(0, 0, 0.6, 0.8), (0.6, 0, 0, 0.8), (0, 0, 0.6, 0.8), 
-                     (0.6, 0, 0.6, 0.8), (0.6, 0.6, 0, 0.8)]
+color_codes: list = [(0.6, 0, 0, 0.8), (0, 0.6, 0, 0.8), (0, 0, 0.6, 0.8), 
+                     (0.6, 0.6, 0, 0.8), (0.6, 0, 0.6, 0.8)]
 
 class Motif:
     def __init__(self, motif_seq: str, motif_color: tuple):
@@ -152,8 +152,8 @@ def main():
     motif_count: int = 0
     with open(motif_filepath, 'r') as motif_file:
         for line in motif_file:
-            motif_count += 1
             motif_set.add(Motif(line.strip(), color_codes[motif_count]))
+            motif_count += 1
 
     # Search each Motif object in each Gene object
     for motif in motif_set:
@@ -162,7 +162,7 @@ def main():
             gene.find_motif(motif)
 
     # Create figure displaying motif positions on genes
-    HEIGHT_PER_GENE: int = 150
+    HEIGHT_PER_GENE: int = 125
     LEFT_MARGIN: int = 50
     HEIGHT: int = (len(gene_set)+1)*HEIGHT_PER_GENE
     WIDTH: int = longest_gene + 100
